@@ -302,6 +302,7 @@ body {
   margin-bottom: 3rem;
   position: relative;
   display: inline-block;
+  justify-items: center;
 }
 
 .section-title::after {
@@ -463,6 +464,7 @@ body {
 
 .about-content {
   flex: 1;
+  
 }
 
 .about-image {
@@ -542,7 +544,7 @@ body {
 .form-group textarea {
   width: 100%;
   padding: 0.8rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(201, 195, 195, 0.192);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   color: var(--light);
@@ -730,6 +732,7 @@ body.light-theme {
     50% { transform: rotate(30deg) translateY(-5px); }
 }
 
+/*
 .python-progress {
     background: linear-gradient(90deg, #3776AB, #FFD43B);
     height: 100%;
@@ -746,7 +749,7 @@ body.light-theme {
 
 .tag {
     background: rgba(55, 118, 171, 0.2);
-    color: #3776AB;
+    color: #dbe1e6;
     padding: 3px 8px;
     border-radius: 15px;
     font-size: 0.7rem;
@@ -763,4 +766,4 @@ body.light-theme {
     background: rgba(0,0,0,0.3);
     padding: 2px 8px;
     border-radius: 10px;
-}
+}/*
