@@ -61,3 +61,34 @@ function updateIcon() {
 // Adiciona o evento de clique
 themeSwitcher.addEventListener('click', toggleTheme);
 });
+
+document.getElementById('meuFormulario').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const btnSubmit = this.querySelector('button[type="submit"]');
+    
+    // Feedback visual
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = 'Enviando...';
+    
+    fetch('https://api.seuservidor.com/contato', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erro na rede');
+        return response.json();
+    })
+    .then(data => {
+        alert('Mensagem enviada com sucesso!');
+        this.reset();
+    })
+    .catch(error => {
+        alert('Erro ao enviar: ' + error.message);
+    })
+    .finally(() => {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = 'Enviar Mensagem';
+    });
+});
