@@ -92,3 +92,11 @@ document.getElementById('meuFormulario').addEventListener('submit', function(e) 
         btnSubmit.textContent = 'Enviar Mensagem';
     });
 });
+
+const toggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+  toggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
