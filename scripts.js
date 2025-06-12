@@ -55,40 +55,35 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // -------------------- FORMULÁRIO DE CONTATO --------------------
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('meuFormulario');
-    if (!form) return;
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        
-        const formData = new FormData(this);
-        const btnSubmit = this.querySelector('button[type="submit"]');
-        
-        btnSubmit.disabled = true;
-        btnSubmit.textContent = 'Enviando...';
+document.getElementById('meuFormulario').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        fetch('https://api.seuservidor.com/contato', {
+    const nome = this.nome.value;
+    const email = this.email.value;
+    const mensagem = this.mensagem.value;
+
+    try {
+        const response = await fetch('https://us-central1-SEU_PROJETO.cloudfunctions.net/enviarEmail', {
             method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) throw new Error('Erro na rede');
-                return response.json();
-            })
-            .then(data => {
-                alert('Mensagem enviada com sucesso!');
-                this.reset();
-            })
-            .catch(error => {
-                alert('Erro ao enviar: ' + error.message);
-            })
-            .finally(() => {
-                btnSubmit.disabled = false;
-                btnSubmit.textContent = 'Enviar Mensagem';
-            });
-    });
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nome, email, mensagem })
+        });
+
+        if (response.ok) {
+            alert('Mensagem enviada com sucesso!');
+            this.reset();
+        } else {
+            const erro = await response.text();
+            alert('Erro ao enviar: ' + erro);
+        }
+    } catch (err) {
+        alert('Erro na requisição: ' + err.message);
+    }
 });
+
 
 // -------------------- MENU HAMBÚRGUER --------------------
 document.addEventListener('DOMContentLoaded', function () {
